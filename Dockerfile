@@ -20,6 +20,7 @@ EXPOSE 80
 EXPOSE 443
 
 ADD init.sh /init.sh
+ADD default_piwik_config.ini /tmp/default_piwik_config.ini
 ADD supervisord_httpd.conf /etc/supervisord.d/supervisord_httpd.conf
 
 RUN chmod +x /init.sh
