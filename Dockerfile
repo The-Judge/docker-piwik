@@ -24,6 +24,7 @@ ADD default_piwik_config.ini /tmp/default_piwik_config.ini
 ADD supervisord_httpd.conf /etc/supervisord.d/supervisord_httpd.conf
 
 RUN chmod +x /init.sh
+RUN mkdir /mnt/piwik-config
 
 VOLUME ["/var/log"]
 VOLUME ["/var/www/html"]
