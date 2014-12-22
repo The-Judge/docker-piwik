@@ -15,6 +15,13 @@ RUN easy_install supervisor \
     && sed -i'' 's#nodaemon=false#nodaemon=true#g' /etc/supervisord.conf \
     && sed -i'' 's#^;\[include#\[include#g' /etc/supervisord.conf \
     && sed -i'' 's#^;files .*$#files = /etc/supervisord.d/*#g' /etc/supervisord.conf
+RUN wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm \
+    && yum install -y epel-release-7-5.noarch.rpm \
+    && rm -f epel-release-7-5.noarch.rpm
+RUN wget http://rpms.famillecollet.com/enterprise/remi-release-7.rpm \
+    && yum install -y remi-release-7.rpm \
+    && rm -f remi-release-7.rpm
+RUN yum install -y php-pecl-geoip
 
 EXPOSE 80
 EXPOSE 443
