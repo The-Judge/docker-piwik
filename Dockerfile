@@ -5,7 +5,8 @@ MAINTAINER mail@marc-richter.info
 RUN yum -y update \
     && yum -y upgrade
 # Install piwik requirements
-RUN yum -y install php php-pdo php-mysql php-pgsql php-bcmath php-gd httpd-tools httpd mariadb postgresql
+RUN yum -y install php php-pdo php-mysql php-pgsql php-bcmath php-gd php-mbstring php-xml httpd-tools httpd mariadb \
+    postgresql
 # Install helpers
 RUN yum -y install python-setuptools unzip wget
 RUN easy_install supervisor \
