@@ -15,6 +15,7 @@ fi
 # Download latest Geo-Database ...
 wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz -O - | \
   gzip -d > /var/www/html/piwik/misc/GeoIPCity.dat
+chown apache:apache /var/www/html/piwik/misc/GeoIPCity.dat
 
 # Start supervisord in foreground (must be the last action of this script)
 /usr/bin/supervisord -c /etc/supervisord.conf --nodaemon
