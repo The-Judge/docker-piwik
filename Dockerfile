@@ -6,7 +6,7 @@ RUN yum -y update \
     && yum -y upgrade
 # Install piwik requirements
 RUN yum -y install php php-pdo php-mysql php-pgsql php-bcmath php-gd php-mbstring php-xml httpd-tools httpd mariadb \
-    postgresql
+    postgresql unzip cronie
 # Install helpers
 RUN yum -y install python-setuptools unzip wget
 RUN easy_install supervisor \
@@ -23,16 +23,20 @@ RUN wget http://rpms.famillecollet.com/enterprise/remi-release-7.rpm \
     && yum install -y remi-release-7.rpm \
     && rm -f remi-release-7.rpm
 RUN yum install -y php-pecl-geoip
-# Download latest Geo-Databases
-# TODO
-# Configure PHP to use this extension and DB Files
-# TODO
+# Download latest Geo-Database ...
+RUN wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz -O - | gzip -d > /var/www/html/piwik/misc/GeoIPCity.dat
+# ... and use it
+RUN echo "geoip.custom_directory=/var/www/html/piwik/misc" >> /etc/php.d/geoip.ini
 
 EXPOSE 80
 EXPOSE 443
 
 ADD init.sh /init.sh
 ADD supervisord_httpd.conf /etc/supervisord.d/supervisord_httpd.conf
+ADD supervisord_crond.conf /etc/supervisord.d/supervisord_crond.conf
+
+ADD crontab /tmp/crontab
+RUN crontab -u apache /tmp/crontab && rm -f /tmp/crontab
 
 RUN chmod +x /init.sh
 RUN mkdir /mnt/piwik-config

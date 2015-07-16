@@ -2,11 +2,9 @@
 # Install piwik
 if [ ! -d /var/www/html/piwik ]; then
     wget http://builds.piwik.org/piwik.zip
-    mv piwik.zip /var/www/html/
-    cd /var/www/html
-    unzip piwik.zip
+    unzip piwik.zip -d /var/www/html/
     rm -f piwik.zip
-    chown apache:apache -R piwik
+    chown apache:apache -R /var/www/html/piwik
 fi
 
 # Use existing Piwik config if available
