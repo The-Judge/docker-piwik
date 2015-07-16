@@ -23,8 +23,6 @@ RUN wget http://rpms.famillecollet.com/enterprise/remi-release-7.rpm \
     && yum install -y remi-release-7.rpm \
     && rm -f remi-release-7.rpm
 RUN yum install -y php-pecl-geoip
-# Download latest Geo-Database ...
-RUN wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz -O - | gzip -d > /var/www/html/piwik/misc/GeoIPCity.dat
 # ... and use it
 RUN echo "geoip.custom_directory=/var/www/html/piwik/misc" >> /etc/php.d/geoip.ini
 
