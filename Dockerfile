@@ -5,10 +5,7 @@ MAINTAINER mail@marc-richter.info
 RUN yum -y update \
     && yum -y upgrade
 # Install piwik requirements
-# This should be a workarround for an installation issue, based on this feedback:
-# https://github.com/RonWilliams/gov-drupal/commit/fa47bf117d0b3846f391b0452a1bb5155b44a3a8
-RUN yum -y install httpd
-RUN yum -y install php php-pdo php-mysql php-pgsql php-bcmath php-gd php-mbstring php-xml httpd-tools mariadb \
+RUN yum -y install php php-pdo php-mysql php-pgsql php-bcmath php-gd php-mbstring php-xml httpd-tools httpd mariadb \
     postgresql unzip cronie
 # Install helpers
 RUN yum -y install python-setuptools unzip wget
