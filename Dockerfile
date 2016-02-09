@@ -6,9 +6,8 @@ RUN yum -y update \
     && yum -y upgrade
 # Install piwik requirements
 # Workarround for cap_set_file - error
-RUN yum -y install httpd ; exit 0
-RUN yum -y install php php-pdo php-mysql php-pgsql php-bcmath php-gd php-mbstring php-xml httpd-tools mariadb \
-    postgresql unzip cronie
+RUN yum -y install php php-pdo php-mysql php-pgsql php-bcmath php-gd php-mbstring php-xml httpd httpd-tools mariadb \
+    postgresql unzip cronie ; exit 0
 # Install helpers
 RUN yum -y install python-setuptools unzip wget
 RUN easy_install supervisor \
