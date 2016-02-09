@@ -5,7 +5,9 @@ MAINTAINER mail@marc-richter.info
 RUN yum -y update \
     && yum -y upgrade
 # Install piwik requirements
-RUN yum -y install php php-pdo php-mysql php-pgsql php-bcmath php-gd php-mbstring php-xml httpd-tools httpd mariadb \
+# Workarround for cap_set_file - error
+RUN yum -y install httpd ; exit 0
+RUN yum -y install php php-pdo php-mysql php-pgsql php-bcmath php-gd php-mbstring php-xml httpd-tools mariadb \
     postgresql unzip cronie
 # Install helpers
 RUN yum -y install python-setuptools unzip wget
