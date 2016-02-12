@@ -17,5 +17,8 @@ wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz -O - 
   gzip -d > /var/www/html/piwik/misc/GeoIPCity.dat
 chown apache:apache /var/www/html/piwik/misc/GeoIPCity.dat
 
+# Update Database
+php /var/www/html/piwik/console core:update --yes --no-interaction --no-ansi
+
 # Start supervisord in foreground (must be the last action of this script)
 /usr/bin/supervisord -c /etc/supervisord.conf --nodaemon
