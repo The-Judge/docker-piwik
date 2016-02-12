@@ -20,5 +20,8 @@ chown apache:apache /var/www/html/piwik/misc/GeoIPCity.dat
 # Update Database
 php /var/www/html/piwik/console core:update --yes --no-interaction --no-ansi
 
+# Create needed folders
+mkdir -p /var/log/httpd
+
 # Start supervisord in foreground (must be the last action of this script)
 /usr/bin/supervisord -c /etc/supervisord.conf --nodaemon
