@@ -25,7 +25,7 @@ RUN yum -y install httpd httpd-tools mariadb postgresql unzip cronie
 
 # Install piwik requirements
 # Workarround for cap_set_file - error
-RUN yum -y install php71-php-cli php71-php-fpm php71-php-gd php71-php-imap php71-php-intl php71-php-json \
+RUN yum -y install php71-php php71-php-cli php71-php-fpm php71-php-gd php71-php-imap php71-php-intl php71-php-json \
     php71-php-ldap php71-php-mbstring php71-php-mcrypt php71-php-mysqlnd php71-php-pdo php71-php-pear php71-php-pgsql \
     php71-php-process php71-php-pspell php71-php-recode php71-php-soap php71-php-xml php71-php-xmlrpc \
     php71-php-devel ; exit 0
