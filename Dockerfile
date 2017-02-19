@@ -11,7 +11,15 @@ RUN yum -y update \
 # Install helpers
 RUN yum -y install python-setuptools unzip wget
 
-# Make PHP 7 available
+# Add EPEL repo
+RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-${EPEL_RELEASE}.noarch.rpm \
+    && yum install -y epel-release-latest-${EPEL_RELEASE}.noarch.rpm \
+    && rm -f epel-release-latest-${EPEL_RELEASE}.noarch.rpm
+# Add REMI repo
+RUN wget http://rpms.famillecollet.com/enterprise/remi-release-${REMI_RELEASE}.rpm \
+    && yum install -y remi-release-${REMI_RELEASE}.rpm \
+    && rm -f remi-release-${REMI_RELEASE}.rpm
+# Add IUS repo to get PHP 7
 RUN wget "https://centos7.iuscommunity.org/ius-release.rpm" \
     && rpm -i ius-release.rpm \
     && rm -f ius-release.rpm \
@@ -34,12 +42,6 @@ RUN easy_install supervisor \
     && sed -i'' 's#^;files .*$#files = /etc/supervisord.d/*#g' /etc/supervisord.conf
 
 # Install GeoIP PECL support for fast Geolocation support in Piwik
-RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-${EPEL_RELEASE}.noarch.rpm \
-    && yum install -y epel-release-latest-${EPEL_RELEASE}.noarch.rpm \
-    && rm -f epel-release-latest-${EPEL_RELEASE}.noarch.rpm
-RUN wget http://rpms.famillecollet.com/enterprise/remi-release-${REMI_RELEASE}.rpm \
-    && yum install -y remi-release-${REMI_RELEASE}.rpm \
-    && rm -f remi-release-${REMI_RELEASE}.rpm
 RUN yum install -y php-pecl-geoip
 # ... and use it
 RUN echo "geoip.custom_directory=/var/www/html/piwik/misc" >> /etc/php.d/geoip.ini
