@@ -29,6 +29,10 @@ RUN yum -y install php71-php php71-php-cli php71-php-fpm php71-php-gd php71-php-
     php71-php-ldap php71-php-mbstring php71-php-mcrypt php71-php-mysqlnd php71-php-pdo php71-php-pear php71-php-pgsql \
     php71-php-process php71-php-pspell php71-php-recode php71-php-soap php71-php-xml php71-php-xmlrpc \
     php71-php-devel ; exit 0
+RUN update-alternatives --install /usr/bin/php php /usr/bin/php71 1 \
+    && update-alternatives --install /usr/bin/php-cgi php-cgi /usr/bin/php71-cgi 1 \
+    && update-alternatives --install /usr/bin/php-pear php-pear /usr/bin/php71-pear 1 \
+    && update-alternatives --install /usr/bin/php-phar php-phar /usr/bin/php71-phar 1
 
 # Install supervisor
 RUN easy_install supervisor \
