@@ -46,7 +46,7 @@ RUN easy_install supervisor \
 # Install GeoIP PECL support for fast Geolocation support in Piwik
 RUN yum install -y php71-php-pecl-geoip
 # ... and use it for piwik
-RUN echo "geoip.custom_directory=/var/www/html/piwik/misc" >> /etc/php.d/geoip.ini
+RUN echo "geoip.custom_directory=/var/www/html/piwik/misc" >> /etc/php/php.d/geoip.ini
 
 EXPOSE 80
 EXPOSE 443
