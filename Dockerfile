@@ -1,7 +1,7 @@
 FROM centos:centos7
 MAINTAINER mail@marc-richter.info
 
-ENV EPEL_RELEASE "7-9"
+ENV EPEL_RELEASE "7"
 ENV REMI_RELEASE "7"
 
 # Update System
@@ -20,9 +20,9 @@ RUN easy_install supervisor \
     && sed -i'' 's#^;\[include#\[include#g' /etc/supervisord.conf \
     && sed -i'' 's#^;files .*$#files = /etc/supervisord.d/*#g' /etc/supervisord.conf
 # Install GeoIP PECL support for fast Geolocation support in Piwik
-RUN wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-${EPEL_RELEASE}.noarch.rpm \
-    && yum install -y epel-release-${EPEL_RELEASE}.noarch.rpm \
-    && rm -f epel-release-${EPEL_RELEASE}.noarch.rpm
+RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-${EPEL_RELEASE}.noarch.rpm \
+    && yum install -y epel-release-latest-${EPEL_RELEASE}.noarch.rpm \
+    && rm -f epel-release-latest-${EPEL_RELEASE}.noarch.rpm
 RUN wget http://rpms.famillecollet.com/enterprise/remi-release-${REMI_RELEASE}.rpm \
     && yum install -y remi-release-${REMI_RELEASE}.rpm \
     && rm -f remi-release-${REMI_RELEASE}.rpm
