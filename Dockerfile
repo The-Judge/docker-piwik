@@ -29,7 +29,8 @@ RUN wget "https://centos7.iuscommunity.org/ius-release.rpm" \
 # Workarround for cap_set_file - error
 #RUN yum -y install php php-pdo php-mysql php-pgsql php-bcmath php-gd php-mbstring php-xml httpd httpd-tools mariadb \
 #    postgresql unzip cronie ; exit 0
-RUN yum -y install php70u-cli php70u-fpm php70u-gd php70u-imap php70u-intl php70u-json php70u-ldap php70u-mbstring \
+RUN yum -y erase php-common \
+    && yum -y install php70u-cli php70u-fpm php70u-gd php70u-imap php70u-intl php70u-json php70u-ldap php70u-mbstring \
     php70u-mcrypt php70u-mysqlnd php70u-pdo php70u-pear php70u-pgsql php70u-process php70u-pspell php70u-recode \
     php70u-soap php70u-xml php70u-xmlrpc php70u-devel ; exit 0
 
